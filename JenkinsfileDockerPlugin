@@ -29,22 +29,8 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                sh 'docker build -p 80:80 -t test_app ./docker-pipeline'
-            }
-            post {
-                success {
-                    slackSend message: 'Build docker ok', color: '#22ff00'
-                }
-                failure {
-                    slackSend message: 'Build docker failed', color: '#ff0000'
-                }
-            }
-        }
-
-        stage('run') {
-            steps {
-                sh 'docker run -d test_app'
+          dir('docker-pipeline') {
+                sh 'ls'
             }
         }
     }
