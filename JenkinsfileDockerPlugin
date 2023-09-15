@@ -29,8 +29,10 @@ pipeline {
         }
 
         stage('Build') {
-          dir('docker-pipeline') {
-                sh 'ls'
+            steps {
+                dir('docker-pipeline') {
+                   sh 'ls'
+                }
             }
         }
     }
