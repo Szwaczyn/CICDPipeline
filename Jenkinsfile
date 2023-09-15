@@ -28,6 +28,14 @@ pipeline {
             steps {
                 sh "mvn clean install -DskipTests"
             }
+            post {
+                success {
+                    slackSend message: 'Build ok'
+                }
+                failure {
+                    slackSend message: 'Build failes'
+                }
+            }
         }
 
         stage('Tests') {
