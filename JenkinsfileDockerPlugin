@@ -44,7 +44,7 @@ pipeline {
 
         stage('run') {
             steps {
-                sh 'docker run test_app'
+                sh 'docker run -d test_app'
             }
         }
     }
