@@ -30,8 +30,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "echo $USER"
-                sh "mvn clean spring-boot:build-image"
+                sh 'docker build -t moja_aplikacja ./docker-pipeline'
             }
             post {
                 success {
