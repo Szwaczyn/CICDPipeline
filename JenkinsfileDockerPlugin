@@ -20,7 +20,7 @@ pipeline {
             }
             post {
                 success {
-                    slackSend message: 'Pulled szkolenie cicd', color: '#4287f5'
+                    slackSend message: 'Pulled code', color: '#4287f5'
                 }
                 failure {
                     slackSend message: 'Faild', color: '#ff0000'
@@ -29,11 +29,6 @@ pipeline {
         }
 
         stage('Build') {
-            when {
-                not {
-                    changelog '.*^\\ci skip\\ .+$'
-                }
-            }
             steps {
                 sh "echo $USER"
                 sh "mvn clean spring-boot:build-image"
