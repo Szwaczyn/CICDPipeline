@@ -22,7 +22,7 @@ pipeline {
                     slackSend message: 'Pulled szkolenie cicd', color: '#4287f5'
                 }
                 failure {
-                    slackSend message: 'Faild'
+                    slackSend message: 'Faild', color: '#ff0000'
                 }
             }
         }
@@ -33,10 +33,10 @@ pipeline {
             }
             post {
                 success {
-                    slackSend message: 'Build ok'
+                    slackSend message: 'Build ok', color: '#22ff00'
                 }
                 failure {
-                    slackSend message: 'Build failes'
+                    slackSend message: 'Build failes', color: '#ff0000'
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         stage('Tests') {
             steps {
                  sh "mvn test"
-                 slackSend message: "Testy ok"
+                 slackSend message: "Testy ok", color: '#22ff00'
             }
         }
     }
