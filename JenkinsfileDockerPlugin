@@ -16,22 +16,15 @@ pipeline {
         stage('Pull szkolenie cicd') {
             steps {
                  git branch: 'main', url: 'https://github.com/rechandler12/szkolenie-cicd-jenkins-gitlab.git'
-                 sh 'echo ' + env.CHANGE_TITLE
-            }
-            post {
-                success {
-                    slackSend message: 'Pulled code', color: '#4287f5'
-                }
-                failure {
-                    slackSend message: 'Faild', color: '#ff0000'
-                }
             }
         }
 
         stage('Build') {
             steps {
                 dir('docker-pipeline') {
-                   docker.build('version_tag', '-f Dockerfile .')
+                    script {
+                        docker.build 'name'
+                    }
                 }
             }
         }
