@@ -30,7 +30,7 @@ pipeline {
 
         stage('Build') {
             when {
-                expression { env.CHANGE_TITLE != 'ci skip' }
+                expression { env.CHANGE_TITLE == 'ci skip' }
             }
             steps {
                 sh "mvn clean install -DskipTests"
