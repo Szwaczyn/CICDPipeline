@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk "jdk-17"
+        maven "maven-3"
+    }
+
+    stages {
+       stage('Clean workspace') {
+            steps {
+                cleanWs disableDeferredWipeout: true, deleteDirs: true
+            }
+        }
+
+        stage('Pull szkolenie cicd') {
+            steps {
+                 git branch: 'main', url: 'https://github.com/rechandler12/szkolenie-cicd-jenkins-gitlab.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('docker-pipeline') {
+                    script {
+                        docker.build 'name'
+                    }
+                }
+            }
+        }
+    }
+}
