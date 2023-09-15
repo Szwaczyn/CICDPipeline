@@ -53,6 +53,11 @@ pipeline {
         }
 
         stage('Tests') {
+            when {
+                not {
+                    changelog '.*^\\[ci skip\\] .+$'
+                }
+            }
             steps {
                  sh "mvn test"
                  slackSend message: "Testy ok", color: '#22ff00'
