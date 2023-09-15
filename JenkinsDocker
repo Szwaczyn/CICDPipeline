@@ -35,27 +35,15 @@ pipeline {
                 }
             }
             steps {
-                sh "mvn clean install -DskipTests"
+                sh "mvn clean spring-boot:build-image"
             }
             post {
                 success {
-                    slackSend message: 'Build ok', color: '#22ff00'
+                    slackSend message: 'Build docker ok', color: '#22ff00'
                 }
                 failure {
-                    slackSend message: 'Build failes', color: '#ff0000'
+                    slackSend message: 'Build docker failed', color: '#ff0000'
                 }
-            }
-        }
-
-        stage('Tests') {
-            when {
-                not {
-                    changelog '.*^\\ci skip\\ .+$'
-                }
-            }
-            steps {
-                 sh "mvn test"
-                 slackSend message: "Testy ok", color: '#22ff00'
             }
         }
     }
