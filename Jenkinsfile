@@ -6,6 +6,8 @@ pipeline {
         maven "maven-3"
     }
 
+    def commitMessage = env.CHANGE_TITLE
+
     stages {
        stage('Clean workspace') {
             steps {
@@ -30,7 +32,7 @@ pipeline {
 
         stage('Build') {
             when {
-                expression { !env.CHANGE_TITLE.startsWith('ci skip') }
+                expression { !commitMessage.startsWith('ci skip') }
             }
             steps {
                 sh "mvn clean install -DskipTests"
@@ -47,7 +49,7 @@ pipeline {
 
         stage('Tests') {
             when {
-                expression { env.CHANGE_TITLE != 'ci skip' }
+                expression { !env.CHANGE_TITLE.startsWith('ci skip') }
             }
             steps {
                  sh "mvn test"
