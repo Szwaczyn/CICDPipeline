@@ -18,6 +18,9 @@ pipeline {
                  git branch: 'main', url: 'https://github.com/Szwaczyn/szkolenie-cicd-jenkins-gitlab-example.git'
             }
             post {
+                success {
+                    slackSend message: 'Pulled szkolenie cicd' color: '#4287f5'
+                }
                 failure {
                     slackSend message: 'Faild'
                 }
