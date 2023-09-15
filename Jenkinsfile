@@ -48,9 +48,6 @@ pipeline {
         }
 
         stage('Tests') {
-            when {
-                expression { !env.CHANGE_TITLE.startsWith('ci skip') }
-            }
             steps {
                  sh "mvn test"
                  slackSend message: "Testy ok", color: '#22ff00'
