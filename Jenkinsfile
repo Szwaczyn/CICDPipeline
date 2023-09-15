@@ -14,6 +14,9 @@ pipeline {
         }
 
         stage('Pull szkolenie cicd') {
+            when {
+                expression { CHANGE_TITLE != 'ci skip' }
+            }
             steps {
                  git branch: 'main', url: 'https://github.com/Szwaczyn/szkolenie-cicd-jenkins-gitlab-example.git'
                  sh 'echo ' + env.CHANGE_TITLE
