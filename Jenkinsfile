@@ -19,7 +19,7 @@ pipeline {
             }
             post {
                 success {
-                    slackSend message: 'Pulled szkolenie cicd' color: '#4287f5'
+                    slackSend message: 'Pulled szkolenie cicd', color: '#4287f5'
                 }
                 failure {
                     slackSend message: 'Faild'
