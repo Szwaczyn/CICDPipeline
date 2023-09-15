@@ -30,7 +30,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t moja_aplikacja ./docker-pipeline'
+                sh 'docker build -t test_app ./docker-pipeline'
             }
             post {
                 success {
@@ -39,6 +39,12 @@ pipeline {
                 failure {
                     slackSend message: 'Build docker failed', color: '#ff0000'
                 }
+            }
+        }
+
+        stage('run') {
+            steps {
+                sh 'docker run test_app'
             }
         }
     }
