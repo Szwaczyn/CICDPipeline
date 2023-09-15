@@ -36,7 +36,7 @@ pipeline {
         stage('Build') {
             when {
                 not {
-                    changelog '.*^\\[ci skip\\] .+$'
+                    changelog '.*^\\ci skip\\ .+$'
                 }
             }
             steps {
