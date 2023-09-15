@@ -30,8 +30,10 @@ pipeline {
 
         stage('Build') {
             when {
-                def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStatus: true).trim()
-                return !commitMessage.contains("ci skip")
+                expression {
+                    def commitMessage = sh(script: 'git log -1 --pretty=%B', returnStatus: true).trim()
+                    return !commitMessage.contains("ci skip")
+                }
             }
             steps {
                 sh "mvn clean install -DskipTests"
