@@ -16,6 +16,7 @@ pipeline {
         stage('Pull szkolenie cicd') {
             steps {
                  git branch: 'main', url: 'https://github.com/Szwaczyn/szkolenie-cicd-jenkins-gitlab-example.git'
+                 sh 'echo ' + env.CHANGE_TITLE
             }
             post {
                 success {
