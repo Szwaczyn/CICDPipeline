@@ -34,6 +34,11 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                not {
+                    changelog '.*^\\[ci skip\\] .+$'
+                }
+            }
             steps {
                 sh "mvn clean install -DskipTests"
             }
