@@ -14,9 +14,6 @@ pipeline {
         }
 
         stage('Pull szkolenie cicd') {
-            when {
-                expression { env.CHANGE_TITLE != 'ci skip' }
-            }
             steps {
                  git branch: 'main', url: 'https://github.com/Szwaczyn/szkolenie-cicd-jenkins-gitlab-example.git'
                  sh 'echo ' + env.CHANGE_TITLE
@@ -32,6 +29,9 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                expression { env.CHANGE_TITLE != 'ci skip' }
+            }
             steps {
                 sh "mvn clean install -DskipTests"
             }
@@ -46,6 +46,9 @@ pipeline {
         }
 
         stage('Tests') {
+            when {
+                expression { env.CHANGE_TITLE != 'ci skip' }
+            }
             steps {
                  sh "mvn test"
                  slackSend message: "Testy ok", color: '#22ff00'
