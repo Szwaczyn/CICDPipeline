@@ -55,7 +55,7 @@ pipeline {
         stage('Tests') {
             when {
                 not {
-                    changelog 'ci skip'
+                    changelog '.*^\\ci skip\\ .+$'
                 }
             }
             steps {
