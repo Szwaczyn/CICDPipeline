@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir('docker-pipeline') {
                     script {
-                        docker.build 'name'
+                        docker.build 'name_1'
                     }
                 }
             }
