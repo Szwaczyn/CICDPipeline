@@ -30,7 +30,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t test_app ./docker-pipeline'
+                sh 'docker build -p 80:80 -t test_app ./docker-pipeline'
             }
             post {
                 success {
