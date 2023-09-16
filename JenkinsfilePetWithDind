@@ -55,12 +55,14 @@ pipeline {
          }
      }
 
-         stage('Artifactory deployment') {
+     stage('Artifactory deployment') {
+        steps {
              withCredentials([usernamePassword(
                      credentialsId: 'nexus-artifactory',
                      passwordVariable: 'ARTIFACTORY_PASSWORD',
                      usernameVariable: 'ARTIFACTORY_USERNAME')]) {
                  sh "mvn $MAVEN_OPTS -DskipTests deploy"
             }
-         }
+        }
+     }
 }
