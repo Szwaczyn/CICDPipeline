@@ -53,16 +53,16 @@ pipeline {
                   slackSend message: "Testy ok", color: '#22ff00'
              }
          }
-     }
 
-     stage('Artifactory deployment') {
-        steps {
-             withCredentials([usernamePassword(
-                     credentialsId: 'nexus-artifactory',
-                     passwordVariable: 'ARTIFACTORY_PASSWORD',
-                     usernameVariable: 'ARTIFACTORY_USERNAME')]) {
-                 sh "mvn $MAVEN_OPTS -DskipTests deploy"
-            }
-        }
+          stage('Artifactory deployment') {
+             steps {
+                  withCredentials([usernamePassword(
+                          credentialsId: 'nexus-artifactory',
+                          passwordVariable: 'ARTIFACTORY_PASSWORD',
+                          usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+                      sh "mvn $MAVEN_OPTS -DskipTests deploy"
+                 }
+             }
+          }
      }
 }
